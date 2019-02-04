@@ -223,6 +223,8 @@ public class Country implements CommandExecutor {
 				return true;
 			}
 			sender.sendMessage(CFMessages.InvalidCountry);
+		} else if (args[0].equalsIgnoreCase("info")) {
+			// TODO Country Info Integration
 		} else {
 			this.SendHelp(sender);
 		}
@@ -231,13 +233,14 @@ public class Country implements CommandExecutor {
 	}
 
 	private void SendHelp(CommandSender sender) {
-		sender.sendMessage(ChatColor.RED + "/plot create <Name>");
-		sender.sendMessage(ChatColor.RED + "/plot remove <Name>");
-		sender.sendMessage(ChatColor.RED + "/plot addmember <Name>");
-		sender.sendMessage(ChatColor.RED + "/plot removemember <Name>");
-		sender.sendMessage(ChatColor.RED + "/plot addowner <Name>");
-		sender.sendMessage(ChatColor.RED + "/plot removeowner <Name>");
-		sender.sendMessage(ChatColor.RED + "/plot clear");
+		sender.sendMessage(ChatColor.RED + "/country create <Name>");
+		sender.sendMessage(ChatColor.RED + "/country remove <Name>");
+		sender.sendMessage(ChatColor.RED + "/country addmember <Name>");
+		sender.sendMessage(ChatColor.RED + "/country removemember <Name>");
+		sender.sendMessage(ChatColor.RED + "/country addowner <Name>");
+		sender.sendMessage(ChatColor.RED + "/country removeowner <Name>");
+		sender.sendMessage(ChatColor.RED + "/country clear");
+		sender.sendMessage(ChatColor.RED + "/country info");
 	}
 
 }
