@@ -1,0 +1,23 @@
+name: PlanetCraftSSG
+version: 1.0.0
+main: nl.jerskisnow.planetcraftssg.Main
+description: PlanetCraftSSG plugin
+author: jerskisnow
+api-version: 1.13
+depend: [WorldEdit, WorldGuard]
+commands:
+  playtime:
+    usage: /<command>
+    aliases:
+    - mytime
+    - time
+  staffchat:
+    usage: /<command>
+    aliases:
+    - staffc
+  credits:
+    usage: /<command>
+    aliases:
+    - credit
+  country:
+    usage: /<command>

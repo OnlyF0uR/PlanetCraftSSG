@@ -1,0 +1,14 @@
+# Config file
+Version: 1.0.0
+StartersOptions:
+  Coins: 100.0
+  Level: 1
+  Country: 'None'
+  Credits: 0.0
+Permissions:
+  Admin: 'planetcraftssg.admin'
+  Staff: 'planetcraftssg.staff'
+  Builder: 'planetcraftssg.builder'
+Scoreboard:
+  Title: '&6&lPlanetCraft'
+  Footer: '&3play.example.net'
