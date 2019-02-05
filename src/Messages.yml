@@ -27,3 +27,7 @@ Country:
   RemovedPlayer: '&cSuccesfully removed &7<PlayerName>&c from &7<Country>&c as <Role>'
   Invalid: '&cYou are not standing on a country!'
   HasBeenCleared: '&cSuccesfully removed all the owners and members from this country!'
+PlotInfo:
+  - '&3Name : &a<Country>'
+  - '&3Owner(s) : &a<Owners>'
+  - '&3Member(s) : &a<Members>'

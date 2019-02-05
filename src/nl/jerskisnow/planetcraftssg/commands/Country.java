@@ -1,5 +1,9 @@
 package nl.jerskisnow.planetcraftssg.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -36,6 +40,10 @@ public class Country implements CommandExecutor {
 	public Country(Main mainFile) {
 		plugin = mainFile;
 	}
+	
+	private ArrayList<String> memberArray = new ArrayList<>();
+	
+	private ArrayList<String> ownerArray = new ArrayList<>();
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -110,10 +118,6 @@ public class Country implements CommandExecutor {
 				sender.sendMessage(CFMessages.CountryHasBeenRemoved(args[1]));
 			} else if (args[0].equalsIgnoreCase("addmember")) {
 				Vector playerLocationVector = plugin.dataManager.getPlayerVector(((Player) sender).getLocation());
-//			Vector playerLocationVector = new Vector(
-//					((Player) sender).getLocation().getBlockX(),
-//					((Player) sender).getLocation().getBlockY(),
-//					((Player) sender).getLocation().getBlockZ());
 
 				@SuppressWarnings("deprecation")
 				OfflinePlayer mentionedPlayer = Bukkit.getOfflinePlayer(args[1]);
@@ -122,10 +126,6 @@ public class Country implements CommandExecutor {
 						.get(WorldGuard.getInstance().getPlatform()
 								.getWorldByName(((Player) sender).getWorld().getName()))
 						.getApplicableRegions(playerLocationVector)) {
-//				if (!r.getId().equals("__global__")) {
-//					sender.sendMessage(CFMessages.PlotIsNotValid);
-//					return true;
-//				}
 					r.getMembers().addPlayer(mentionedPlayer.getUniqueId());
 					sender.sendMessage(CFMessages.AddedPlayerToCountry(mentionedPlayer.getName(), r.getId(),
 							CountryRole.MEMBER.toString()));
@@ -134,10 +134,6 @@ public class Country implements CommandExecutor {
 				sender.sendMessage(CFMessages.InvalidCountry);
 			} else if (args[0].equalsIgnoreCase("removemember")) {
 				Vector playerLocationVector = plugin.dataManager.getPlayerVector(((Player) sender).getLocation());
-//			Vector playerLocationVector = new Vector(
-//					((Player) sender).getLocation().getBlockX(),
-//					((Player) sender).getLocation().getBlockY(),
-//					((Player) sender).getLocation().getBlockZ());
 
 				@SuppressWarnings("deprecation")
 				OfflinePlayer mentionedPlayer = Bukkit.getOfflinePlayer(args[1]);
@@ -146,10 +142,6 @@ public class Country implements CommandExecutor {
 						.get(WorldGuard.getInstance().getPlatform()
 								.getWorldByName(((Player) sender).getWorld().getName()))
 						.getApplicableRegions(playerLocationVector)) {
-//				if (!r.getId().equals("__global__")) {
-//					sender.sendMessage(CFMessages.PlotIsNotValid);
-//					return true;
-//				}
 					r.getMembers().removePlayer(mentionedPlayer.getUniqueId());
 					sender.sendMessage(CFMessages.RemovedPlayerFromCountry(mentionedPlayer.getName(), r.getId(),
 							CountryRole.MEMBER.toString()));
@@ -158,10 +150,6 @@ public class Country implements CommandExecutor {
 				sender.sendMessage(CFMessages.InvalidCountry);
 			} else if (args[0].equalsIgnoreCase("addowner")) {
 				Vector playerLocationVector = plugin.dataManager.getPlayerVector(((Player) sender).getLocation());
-//			Vector playerLocationVector = new Vector(
-//					((Player) sender).getLocation().getBlockX(),
-//					((Player) sender).getLocation().getBlockY(),
-//					((Player) sender).getLocation().getBlockZ());
 
 				@SuppressWarnings("deprecation")
 				OfflinePlayer mentionedPlayer = Bukkit.getOfflinePlayer(args[1]);
@@ -169,11 +157,7 @@ public class Country implements CommandExecutor {
 				for (ProtectedRegion r : WorldGuard.getInstance().getPlatform().getRegionContainer()
 						.get(WorldGuard.getInstance().getPlatform()
 								.getWorldByName(((Player) sender).getWorld().getName()))
-						.getApplicableRegions(playerLocationVector)) {
-//				if (!r.getId().equals("__global__")) {
-//					sender.sendMessage(CFMessages.PlotIsNotValid);
-//					return true;
-//				}				
+						.getApplicableRegions(playerLocationVector)) {			
 					r.getOwners().addPlayer(mentionedPlayer.getUniqueId());
 					sender.sendMessage(CFMessages.AddedPlayerToCountry(mentionedPlayer.getName(), r.getId(),
 							CountryRole.OWNER.toString()));
@@ -182,10 +166,6 @@ public class Country implements CommandExecutor {
 				sender.sendMessage(CFMessages.InvalidCountry);
 			} else if (args[0].equalsIgnoreCase("removeowner")) {
 				Vector playerLocationVector = plugin.dataManager.getPlayerVector(((Player) sender).getLocation());
-//			Vector playerLocationVector = new Vector(
-//					((Player) sender).getLocation().getBlockX(),
-//					((Player) sender).getLocation().getBlockY(),
-//					((Player) sender).getLocation().getBlockZ());
 
 				@SuppressWarnings("deprecation")
 				OfflinePlayer mentionedPlayer = Bukkit.getOfflinePlayer(args[1]);
@@ -194,10 +174,6 @@ public class Country implements CommandExecutor {
 						.get(WorldGuard.getInstance().getPlatform()
 								.getWorldByName(((Player) sender).getWorld().getName()))
 						.getApplicableRegions(playerLocationVector)) {
-//				if (!r.getId().equals("__global__")) {
-//					sender.sendMessage(CFMessages.PlotIsNotValid);
-//					return true;
-//				}
 					r.getOwners().removePlayer(mentionedPlayer.getUniqueId());
 					sender.sendMessage(CFMessages.RemovedPlayerFromCountry(mentionedPlayer.getName(), r.getId(),
 							CountryRole.OWNER.toString()));
@@ -210,10 +186,7 @@ public class Country implements CommandExecutor {
 
 		} else if (args.length == 1 && args[0].equalsIgnoreCase("clear")) {
 			Vector playerLocationVector = plugin.dataManager.getPlayerVector(((Player) sender).getLocation());
-//			Vector playerLocationVector = new Vector(
-//					((Player) sender).getLocation().getBlockX(),
-//					((Player) sender).getLocation().getBlockY(),
-//					((Player) sender).getLocation().getBlockZ());
+			
 			for (ProtectedRegion r : WorldGuard.getInstance().getPlatform().getRegionContainer()
 					.get(WorldGuard.getInstance().getPlatform().getWorldByName(((Player) sender).getWorld().getName()))
 					.getApplicableRegions(playerLocationVector)) {
@@ -224,7 +197,42 @@ public class Country implements CommandExecutor {
 			}
 			sender.sendMessage(CFMessages.InvalidCountry);
 		} else if (args[0].equalsIgnoreCase("info")) {
-			// TODO Country Info Integration
+			Vector playerLocationVector = plugin.dataManager.getPlayerVector(((Player) sender).getLocation());
+			
+			for (ProtectedRegion r : WorldGuard.getInstance().getPlatform().getRegionContainer().get(WorldGuard.getInstance().getPlatform().getWorldByName(((Player) sender).getWorld().getName())).getApplicableRegions(playerLocationVector)) {			
+				// Owners
+				Object[] pOwners = r.getOwners().getUniqueIds().toArray();
+				for (int i = 0; i < pOwners.length; i++) {
+					OfflinePlayer player = Bukkit.getOfflinePlayer((UUID) pOwners[i]);
+					ownerArray.add(player.getName());
+				}
+				String finalOwners = "None";
+				if (!ownerArray.isEmpty()) {
+					finalOwners = String.join(", ", ownerArray);
+				}
+				// Members
+				Object[] pMembers = r.getMembers().getUniqueIds().toArray();
+				for (int i = 0; i < pMembers.length; i++) {
+					OfflinePlayer player = Bukkit.getOfflinePlayer((UUID) pMembers[i]);
+					memberArray.add(player.getName());
+				}
+				String finalMembers = "None";
+				if (!memberArray.isEmpty()) {
+					finalMembers = String.join(", ", memberArray);
+				}
+				
+				List<String> msg = plugin.dataManager.ColorList(plugin.fileManager.getConfig("Messages.yml").get().getStringList("PlotInfo"));
+				for (String string : msg) {
+					sender.sendMessage(string
+							.replaceAll("<Country>", r.getId())
+							.replaceAll("<Owners>", finalOwners)
+							.replaceAll("<Members>", finalMembers));
+				}
+				ownerArray.clear();
+				memberArray.clear();
+				return true;
+			}
+			sender.sendMessage(CFMessages.InvalidCountry);
 		} else {
 			this.SendHelp(sender);
 		}
