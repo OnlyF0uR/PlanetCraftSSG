@@ -12,21 +12,21 @@ public class CFMessages {
 	/*
 	 * NoPermission message and other player related messages
 	 */
-	public static String NoPermission(String permission) {
+	public static final String NoPermission(String permission) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("NoPermission").replaceAll("<Permission>", permission));
 	}
-	public static String PlayerDoesNotExists = ChatColor.translateAlternateColorCodes('&',
+	public static final String PlayerDoesNotExists = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("PlayerDoesNotExists"));
 	
 	/*
 	 * Player join & Player Leave
 	 */
-	public static String PlayerJoin(String playername) {
+	public static final String PlayerJoin(String playername) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("PlayerJoin").replaceAll("<PlayerName>", playername));
 	}
-	public static String PlayerQuit(String playername) {
+	public static final String PlayerQuit(String playername) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("PlayerQuit").replaceAll("<PlayerName>", playername));
 	}
@@ -34,7 +34,7 @@ public class CFMessages {
 	/*
 	 * (Staff)Chat
 	 */
-	public static String ChatFormat(String country, Integer level, String playername, String message) {
+	public static final String ChatFormat(String country, Integer level, String playername, String message) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("ChatFormat")
 						.replaceAll("<Country>", country)
@@ -42,13 +42,13 @@ public class CFMessages {
 						.replaceAll("<PlayerName>", playername)
 						.replaceAll("<Message>", message));
 	}
-	public static String StaffChatFormat(String playername, String message) {
+	public static final String StaffChatFormat(String playername, String message) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("StaffChat.Format")
 						.replaceAll("<PlayerName>", playername)
 						.replaceAll("<Message>", message));
 	}
-	public static String EnteredStaffChat = ChatColor.translateAlternateColorCodes('&',
+	public static final String EnteredStaffChat = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("StaffChat.EnteredChannel"));
 	public static String LeftStaffChat = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("StaffChat.LeftChannel"));
@@ -56,13 +56,13 @@ public class CFMessages {
 	/*
 	 * PlayTime messages
 	 */
-	public static String OwnPlayTime(String playtime) {
+	public static final String OwnPlayTime(String playtime) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("OwnPlayTime")
 						.replaceAll("<Time>", playtime));
 	}
 
-	public static String PlayerPlayTime(String playername, String playtime) {
+	public static final String PlayerPlayTime(String playername, String playtime) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("PlayerPlayTime")
 						.replaceAll("<PlayerName>", playername)
@@ -71,34 +71,34 @@ public class CFMessages {
 	/*
 	 * Credits messages
 	 */
-	public static String CreditsHasBeenAdded(String credits) {
+	public static final String CreditsHasBeenAdded(String credits) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("Credits.HasBeenAdded")
 						.replaceAll("<Credits>", credits));
 	}
-	public static String CreditsHasBeenRemoved(String credits) {
+	public static final String CreditsHasBeenRemoved(String credits) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("Credits.HasBeenRemoved")
 						.replaceAll("<Credits>", credits));
 	}
-	public static String NotEnoughCredits(String playername) {
+	public static final String NotEnoughCredits(String playername) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("Credits.NotEnough")
 						.replaceAll("<PlayerName>", playername));
 	}
-	public static String CreditsHasBeenSet(String playername, String credits) {
+	public static final String CreditsHasBeenSet(String playername, String credits) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("Credits.HasBeenSet")
 						.replaceAll("<PlayerName>", playername)
 						.replaceAll("<Credits>", credits));
 	}
-	public static String CreditsInfoAdmin(String playername, String credits) {
+	public static final String CreditsInfoAdmin(String playername, String credits) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("Credits.InfoAdmin")
 						.replaceAll("<PlayerName>", playername)
 						.replaceAll("<Credits>", credits));
 	}
-	public static String CreditsInfo(String credits) {
+	public static final String CreditsInfo(String credits) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("Credits.Info")
 						.replaceAll("<Credits>", credits));
@@ -107,56 +107,56 @@ public class CFMessages {
 	/*
 	 * Country command messages
 	 */
-	public static String NoSelectionFound = ChatColor.translateAlternateColorCodes('&',
+	public static final String NoSelectionFound = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("Country.NoSelectionFound"));
-	public static String CountryDoesNotExists = ChatColor.translateAlternateColorCodes('&',
+	public static final String CountryDoesNotExists = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("Country.DoesNotExists"));
-	public static String CountryAlreadyExists = ChatColor.translateAlternateColorCodes('&',
+	public static final String CountryAlreadyExists = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("Country.AlreadyExists"));
-	public static String CountryHasBeenCreated(String country) {
+	public static final String CountryHasBeenCreated(String country) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("Country.HasBeenCreated")
 						.replaceAll("<Country>", country));
 	}
-	public static String CountryHasBeenRemoved(String country) {
+	public static final String CountryHasBeenRemoved(String country) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("Country.HasBeenRemoved")
 						.replaceAll("<Country>", country));
 	}
-	public static String AddedPlayerToCountry(String playername, String country, String role) {
+	public static final String AddedPlayerToCountry(String playername, String country, String role) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("Country.AddedPlayer")
 						.replaceAll("<PlayerNme>", playername)
 				    	.replaceAll("<Country>", country)
 						.replaceAll("<Role>", role));
 	}
-	public static String RemovedPlayerFromCountry(String playername, String country, String role) {
+	public static final String RemovedPlayerFromCountry(String playername, String country, String role) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("Country.RemovedPlayer")
 						.replaceAll("<PlayerNme>", playername)
 				    	.replaceAll("<Country>", country)
 						.replaceAll("<Role>", role));
 	}
-	public static String InvalidCountry = ChatColor.translateAlternateColorCodes('&',
+	public static final String InvalidCountry = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("Country.Invalid"));
-	public static String ClearedCountry = ChatColor.translateAlternateColorCodes('&',
+	public static final String ClearedCountry = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("Country.HasBeenCleared"));
 
-	public static String CMDUsageError(String commandusage) {
+	public static final String CMDUsageError(String commandusage) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("CommandUsageError")
 						.replaceAll("<CMDUsage>", commandusage));
 	}
-	public static String ReportedPlayer(String reportid) {
+	public static final String ReportedPlayer(String reportid) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("ReportedPlayer")
 						.replaceAll("<ReportID>", reportid));
 	}
 	
-	public static String ReportDoesNotExists = ChatColor.translateAlternateColorCodes('&',
+	public static final String ReportDoesNotExists = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("ReportDoesNotExists"));
 	
-	public static String NoReportsFound = ChatColor.translateAlternateColorCodes('&',
+	public static final String NoReportsFound = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("NoReportsFound"));
 	
 
