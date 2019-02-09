@@ -29,9 +29,9 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 
 import nl.jerskisnow.planetcraftssg.Main;
-import nl.jerskisnow.planetcraftssg.utils.CountryManager.CountryRole;
 import nl.jerskisnow.planetcraftssg.utils.CFMessages;
 import nl.jerskisnow.planetcraftssg.utils.CountryManager;
+import nl.jerskisnow.planetcraftssg.utils.CountryManager.CountryRole;
 
 public class Country implements CommandExecutor {
 
@@ -221,7 +221,7 @@ public class Country implements CommandExecutor {
 					finalMembers = String.join(", ", memberArray);
 				}
 				
-				List<String> msg = plugin.dataManager.ColorList(plugin.fileManager.getConfig("Messages.yml").get().getStringList("PlotInfo"));
+				List<String> msg = plugin.dataManager.colorList(plugin.fileManager.getConfig("Messages.yml").get().getStringList("PlotInfo"));
 				for (String string : msg) {
 					sender.sendMessage(string
 							.replaceAll("<Country>", r.getId())

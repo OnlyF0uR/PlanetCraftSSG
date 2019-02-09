@@ -1,6 +1,8 @@
 package nl.jerskisnow.planetcraftssg.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -11,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import nl.jerskisnow.planetcraftssg.Main;
@@ -20,6 +23,8 @@ public class DataManager {
 	private HashMap<UUID, Long> playerTime = new HashMap<>();
 
 	private ArrayList<String> staffChat = new ArrayList<>();
+	
+	private SimpleDateFormat datum = new SimpleDateFormat("dd-MM-yyyy");
 
 	Main plugin;
 
@@ -31,6 +36,7 @@ public class DataManager {
 		plugin.fileManager.getConfig("Config.yml").copyDefaults(true).save();
 		plugin.fileManager.getConfig("Messages.yml").copyDefaults(true).save();
 		plugin.fileManager.getConfig("PlayerData.yml").copyDefaults(true).save();
+		plugin.fileManager.getConfig("ReportData.yml").copyDefaults(true).save();
 	}
 
 	public boolean isRegisteredPlayer(UUID userID) {
@@ -46,8 +52,15 @@ public class DataManager {
 
 	public void saveNewPlayer(UUID userID) {
 		/*
-		 * UUID: Coins: 0 Level: 1 Credits: 0 Time: Days: 0 Hours: 0 Minutes: 0 Seconds:
-		 * 0
+		 * UUID:
+		 *   Coins: 0.0
+		 *   Level: 1 
+		 *   Credits: 0.0 
+		 *   Time: 
+		 *     Days: 0
+		 *     Hours: 0
+		 *     Minutes: 0 
+		 *     Seconds: 0
 		 */
 		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".Coins",
 				plugin.fileManager.getConfig("Config.yml").get().getDouble("StartersOptions.Coins"));
@@ -270,11 +283,49 @@ public class DataManager {
 			}
 		}
 	}
+	
+	/*
+	 * Report Part
+	 */
+	public boolean reportExists(String reportid) {
+		return plugin.fileManager.getConfig("ReportData.yml").get().contains(reportid.toString());
+	}
+	public void initiateReport(UUID authorid, UUID suspectid, String reason) {
+		Integer newReportID = this.randomNumber(1000, 9999);
+		plugin.fileManager.getConfig("ReportData.yml").get().set(newReportID + ".Author", authorid.toString());
+		plugin.fileManager.getConfig("ReportData.yml").get().set(newReportID + ".Suspect", suspectid.toString());
+		plugin.fileManager.getConfig("ReportData.yml").get().set(newReportID + ".Reason", removeLastChar(reason));
+		plugin.fileManager.getConfig("ReportData.yml").get().set(newReportID + ".Date", datum.format(Calendar.getInstance().getTime()));
+		plugin.fileManager.getConfig("ReportData.yml").save();
+		Bukkit.getPlayer(authorid).sendMessage(CFMessages.ReportedPlayer(newReportID.toString()));
+	}
+	public void removeReport(String reportid) {
+		plugin.fileManager.getConfig("ReportData.yml").get().set(reportid, null);
+		plugin.fileManager.getConfig("ReportData.yml").save();
+	}
+	public void sendReportList(CommandSender sender) {
+		sender.sendMessage(ChatColor.RED + "Reports:");
+		if (plugin.fileManager.getConfig("ReportData.yml").get().getValues(false).keySet().isEmpty()) {
+			sender.sendMessage(CFMessages.NoReportsFound);
+		}
+		for (String id : plugin.fileManager.getConfig("ReportData.yml").get().getValues(false).keySet()) {
+			sender.sendMessage(ChatColor.GRAY + " - " + id);
+		}
+	}
+	public void sendReportInfo(CommandSender sender, String reportID) {
+		OfflinePlayer author = Bukkit.getOfflinePlayer(UUID.fromString(plugin.fileManager.getConfig("ReportData.yml").get().getString(reportID + ".Author")));
+		OfflinePlayer suspect = Bukkit.getOfflinePlayer(UUID.fromString(plugin.fileManager.getConfig("ReportData.yml").get().getString(reportID + ".Author")));
+		// TODO: Add a message Stringlist with replacing values for this
+		sender.sendMessage(ChatColor.RED + "Author: " + ChatColor.GRAY + author.getName());
+		sender.sendMessage(ChatColor.RED + "Suspect: " + ChatColor.GRAY + suspect.getName());
+		sender.sendMessage(ChatColor.RED + "Reason: " + ChatColor.GRAY + plugin.fileManager.getConfig("ReportData.yml").get().getString(reportID + ".Reason"));
+		sender.sendMessage(ChatColor.RED + "Date: " + ChatColor.GRAY + plugin.fileManager.getConfig("ReportData.yml").get().getString(reportID + ".Date"));
+	}
 
 	/*
 	 * Other functions - Transmitters etc.
 	 */
-	public String ArgsToString(String[] arguments) { // Capital because its a normally working Java Function
+	public String argsToString(String[] arguments) { // Capital because its a normally working Java Function
 		String str = "";
 		for (int i = 0; i != arguments.length; i++) {
 			str = str + arguments[i] + " ";
@@ -282,12 +333,20 @@ public class DataManager {
 		return str;
 	}
 
-	public List<String> ColorList(List<String> input) {
+	public List<String> colorList(List<String> input) {
 		List<String> result = new ArrayList<>();
 		for (String string : input) {
 			result.add(ChatColor.translateAlternateColorCodes('&', string));
 		}
 		return result;
+	}
+	
+	private Integer randomNumber(int max, int min) {
+		return (int) ((Math.random() * (max - min)) + min);
+	}
+	
+	private String removeLastChar(String str) {
+	    return str.substring(0, str.length() - 1);
 	}
 
 }

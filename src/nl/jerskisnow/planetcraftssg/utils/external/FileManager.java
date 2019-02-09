@@ -1,4 +1,4 @@
-package nl.jerskisnow.planetcraftssg.utils;
+package nl.jerskisnow.planetcraftssg.utils.external;
 
 import java.io.File;
 import java.io.IOException;

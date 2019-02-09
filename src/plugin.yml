@@ -21,3 +21,5 @@ commands:
     - credit
   country:
     usage: /<command>
+  report:
+    usage: /<command>

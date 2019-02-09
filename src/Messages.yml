@@ -31,3 +31,7 @@ PlotInfo:
   - '&3Name : &a<Country>'
   - '&3Owner(s) : &a<Owners>'
   - '&3Member(s) : &a<Members>'
+CommandUsageError: '&cPlease use: &7<CommandUsage>'
+ReportedPlayer: '&cReport has been sent! ReportID: &7<ReportID>&c!'
+ReportDoesNotExists: '&cThere is no active report with that ID!'
+NoReportsFound: '&cNo active reports were found!'

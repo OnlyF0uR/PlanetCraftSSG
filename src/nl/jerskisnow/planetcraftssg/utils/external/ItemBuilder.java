@@ -1,4 +1,4 @@
-package nl.jerskisnow.planetcraftssg.utils;
+package nl.jerskisnow.planetcraftssg.utils.external;
 
 import java.util.ArrayList;
 import java.util.Arrays;

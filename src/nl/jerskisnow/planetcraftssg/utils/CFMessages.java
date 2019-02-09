@@ -141,6 +141,23 @@ public class CFMessages {
 			plugin.dataManager.getMessage("Country.Invalid"));
 	public static String ClearedCountry = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("Country.HasBeenCleared"));
+
+	public static String CMDUsageError(String commandusage) {
+		return ChatColor.translateAlternateColorCodes('&',
+				plugin.dataManager.getMessage("CommandUsageError")
+						.replaceAll("<CMDUsage>", commandusage));
+	}
+	public static String ReportedPlayer(String reportid) {
+		return ChatColor.translateAlternateColorCodes('&',
+				plugin.dataManager.getMessage("ReportedPlayer")
+						.replaceAll("<ReportID>", reportid));
+	}
+	
+	public static String ReportDoesNotExists = ChatColor.translateAlternateColorCodes('&',
+			plugin.dataManager.getMessage("ReportDoesNotExists"));
+	
+	public static String NoReportsFound = ChatColor.translateAlternateColorCodes('&',
+			plugin.dataManager.getMessage("NoReportsFound"));
 	
 
 }

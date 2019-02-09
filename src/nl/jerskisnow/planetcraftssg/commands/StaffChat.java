@@ -29,7 +29,7 @@ public class StaffChat implements CommandExecutor {
 				for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
 					if (plugin.dataManager.isStaff(onlinePlayer)) {
 						onlinePlayer.sendMessage(
-								CFMessages.StaffChatFormat(sender.getName(), plugin.dataManager.ArgsToString(args)));
+								CFMessages.StaffChatFormat(sender.getName(), plugin.dataManager.argsToString(args)));
 					}
 				}
 			}
