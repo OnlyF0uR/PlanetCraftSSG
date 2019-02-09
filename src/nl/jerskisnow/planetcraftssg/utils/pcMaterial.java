@@ -1,0 +1,88 @@
+package nl.jerskisnow.planetcraftssg.utils;
+
+import org.bukkit.Material;
+
+public enum pcMaterial {
+	
+	/*
+	 * IRIDIUM PART
+	 */
+	IRIDIUM_INGOT("NETHER_STAR"),
+	IRIDIUM_ORE("GRAY_CONCRETE"),
+	IRIDIUM_BLOCK("WHITE_GLAZED_TERRACOTTA"),
+	/*
+	 * IRON PART
+	 */
+	IRON_BOAT("SPRUCE_BOAT"),
+	/*
+	 * NICKER PART
+	 */
+	NICKEL_INGOT("GLISTERING_MELON_SLICE"),
+	NICKEL_ORE("LIGHT_BLUE_CONCRETE"),
+	NICKEL_BLOCK("ORANGE_GLAZED_TERRACOTTA"),
+	/*
+	 * TITANIUM PART
+	 */
+	TITANIUM_INGOT("GOLD_NUGGET"),
+	TITANIUM_ORE("LIGHT_GRAY_CONCRETE"),
+	TITANIUM_BLOCK("MAGENTA_GLAZED_TERRACOTTA"),
+	/*
+	 * OPAL PART
+	 */
+	OPAL("NETHER_WART"),
+	OPAL_ORE("LIME_CONCRETE"),
+	OPAL_BLOCK("LIGHT_BLUE_GLAZED_TERRACOTTA"),
+	/*
+	 * TIN PART
+	 */
+	TIN_INGOT("MAGMA_CREAM"),
+	TIN_ORE("MAGENTA_CONCRETE"),
+	TIN_BLOCK("YELLOW_GLAZED_TERRACOTTA"),
+	/*
+	 * COPPER PART
+	 */
+	COPPER_INGOT("BLAZE_ROD"),
+	COPPER_ORE("ORANGE_CONCRETE"),
+	COPPER_BLOCK("LIME_GLAZED_TERRACOTTA"),
+	/*
+	 * ALUMINUM PART
+	 */
+	ALUMINUM_DUST("BLAZE_POWDER"),
+	ALUMINUM_ORE("WHITE_CONCRETE"),
+	ALUMINUM_BLOCK("PINK_GLAZED_TERRACOTTA"),
+	/*
+	 * URANIUM PART
+	 */
+	URANIUM_INGOT("RABBIT_FOOT"),
+	URANIUM_ORE("YELLOW_CONCRETE"),
+	URANIUM_BLOCK("GRAY_GLAZED_TERRACOTTA"),
+	/*
+	 * STEEL PART
+	 */
+	STEEL_INGOT("IRON_NUGGET"),
+	STEEL_BLOCK("LIGHT_GRAY_GLAZED_TERRACOTTA"),
+	STEEL_PICKAXE("DIAMOND_PICKAXE"),
+	STEEL_HOE("DIAMOND_HOE"),
+	STEEL_AXE("DIAMOND_AXE"),
+	STEEL_SHOVEL("DIAMOND_SHOVEL"),
+	STEEL_SWORD("DIAMOND_SWORD");
+	
+	
+	
+	String m;
+	
+	// Constructor
+	pcMaterial(String m){
+		this.m = m;
+	}
+	
+	// Method to get the actual item
+	public Material getMaterial() {
+        Material mat = Material.matchMaterial(this.toString());
+        if(mat != null){
+            return mat;
+        }
+        return Material.matchMaterial(m);
+    }
+	
+}

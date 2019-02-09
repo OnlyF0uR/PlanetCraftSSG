@@ -1,5 +1,6 @@
 package nl.jerskisnow.planetcraftssg.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -17,6 +18,7 @@ public class PlayerJoin implements Listener {
 		e.setJoinMessage(CFMessages.PlayerJoin(e.getPlayer().getName()));
 		if (!plugin.dataManager.isRegisteredPlayer(e.getPlayer().getUniqueId())) {
 			plugin.dataManager.saveNewPlayer(e.getPlayer().getUniqueId());
+			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "minecraft:recipe add " + e.getPlayer().getName() + "*");
 		}
 		plugin.dataManager.initiatePlayTimeProcess(e.getPlayer().getUniqueId());
 
