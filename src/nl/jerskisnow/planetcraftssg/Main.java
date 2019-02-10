@@ -9,6 +9,8 @@ import nl.jerskisnow.planetcraftssg.commands.PlayTime;
 import nl.jerskisnow.planetcraftssg.commands.Report;
 import nl.jerskisnow.planetcraftssg.commands.StaffChat;
 import nl.jerskisnow.planetcraftssg.listeners.AntiPlayerReload;
+import nl.jerskisnow.planetcraftssg.listeners.BlockBreak;
+import nl.jerskisnow.planetcraftssg.listeners.BlockPlace;
 import nl.jerskisnow.planetcraftssg.listeners.PlayerChat;
 import nl.jerskisnow.planetcraftssg.listeners.PlayerJoin;
 import nl.jerskisnow.planetcraftssg.listeners.PlayerQuit;
@@ -47,7 +49,7 @@ public class Main extends JavaPlugin {
 	}
 
 	private void loadCommands() {
-		this.getCommand("playtime").setExecutor(new PlayTime(this));
+		this.getCommand("time").setExecutor(new PlayTime(this));
 		this.getCommand("staffchat").setExecutor(new StaffChat(this));
 		this.getCommand("credits").setExecutor(new Credits(this));
 		this.getCommand("country").setExecutor(new Country(this));
@@ -59,6 +61,8 @@ public class Main extends JavaPlugin {
 		this.getServer().getPluginManager().registerEvents(new PlayerQuit(), this);
 		this.getServer().getPluginManager().registerEvents(new PlayerChat(), this);
 		this.getServer().getPluginManager().registerEvents(new AntiPlayerReload(), this);
+		this.getServer().getPluginManager().registerEvents(new BlockBreak(), this);
+		this.getServer().getPluginManager().registerEvents(new BlockPlace(), this);
 	}
 
 	private boolean isRequiredVersion() {

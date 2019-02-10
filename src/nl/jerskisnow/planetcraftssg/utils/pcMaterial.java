@@ -67,8 +67,6 @@ public enum pcMaterial {
 	STEEL_SHOVEL("DIAMOND_SHOVEL"),
 	STEEL_SWORD("DIAMOND_SWORD");
 	
-	
-	
 	String m;
 	
 	// Constructor

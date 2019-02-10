@@ -159,6 +159,9 @@ public class CustomRecipes {
 	}
 	
 	private void loadWeapons() {
+		/*
+		 * STEEL SWORD
+		 */
 		ShapedRecipe steelSword = new ShapedRecipe(
 				new NamespacedKey(plugin, "steelsword_key"),
 				new ItemStack(pcMaterial.STEEL_SWORD.getMaterial()));
@@ -172,6 +175,9 @@ public class CustomRecipes {
 	}
 	
 	private void loadGear() {
+		/*
+		 * STEEL CHESTPLATE
+		 */
 		ShapedRecipe steelChestPlate = new ShapedRecipe(
 				new NamespacedKey(plugin, "steelchestplate_key"),
 				new ItemStack(Material.DIAMOND_CHESTPLATE));
@@ -186,7 +192,7 @@ public class CustomRecipes {
 	
 	private void loadOres() {
 		/*
-		 * IRON_NUGGET
+		 * STEEL INGOT
 		 */
 		ShapedRecipe ironNuggetRecipe = new ShapedRecipe(
 				new NamespacedKey(plugin, "ironnugget_key"),

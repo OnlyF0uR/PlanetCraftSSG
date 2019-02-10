@@ -27,6 +27,8 @@ Country:
   RemovedPlayer: '&cSuccesfully removed &7<PlayerName>&c from &7<Country>&c as <Role>'
   Invalid: '&cYou are not standing on a country!'
   HasBeenCleared: '&cSuccesfully removed all the owners and members from this country!'
+  NoNationality: '&cYou are not a citizen of a country!'
+  Left: '&cYou sucessfully left your country!'
 PlotInfo:
   - '&3Name : &a<Country>'
   - '&3Owner(s) : &a<Owners>'
@@ -35,3 +37,4 @@ CommandUsageError: '&cPlease use: &7<CommandUsage>'
 ReportedPlayer: '&cReport has been sent! ReportID: &7<ReportID>&c!'
 ReportDoesNotExists: '&cThere is no active report with that ID!'
 NoReportsFound: '&cNo active reports were found!'
+WrongTool: '&cYou used the wrong tool to break that block!'

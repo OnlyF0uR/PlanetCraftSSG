@@ -159,5 +159,13 @@ public class CFMessages {
 	public static final String NoReportsFound = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("NoReportsFound"));
 	
+	public static final String WrongTool = ChatColor.translateAlternateColorCodes('&',
+			plugin.dataManager.getMessage("WrongTool"));
+	
+	public static final String NotAMemberOfACountry = ChatColor.translateAlternateColorCodes('&',
+			plugin.dataManager.getMessage("Country.NoNationality"));
+	
+	public static final String LeftCountry = ChatColor.translateAlternateColorCodes('&',
+			plugin.dataManager.getMessage("Country.Left"));
 
 }

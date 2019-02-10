@@ -6,11 +6,10 @@ author: jerskisnow
 api-version: 1.13
 depend: [WorldEdit, WorldGuard]
 commands:
-  playtime:
+  time:
     usage: /<command>
     aliases:
-    - mytime
-    - time
+    - onlinetime
   staffchat:
     usage: /<command>
     aliases:

@@ -12,3 +12,6 @@ Permissions:
 Scoreboard:
   Title: '&6&lPlanetCraft'
   Footer: '&3play.example.net'
+CancelBlockBreakWithWrongTool: false
+BlockBreakCooldown: 1.5
+BlockPlaceCooldown: 1.5
