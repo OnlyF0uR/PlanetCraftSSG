@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
 import nl.jerskisnow.planetcraftssg.Main;
+import nl.jerskisnow.planetcraftssg.api.events.ActiveCooldownEvent;
 import nl.jerskisnow.planetcraftssg.utils.CFMessages;
 
 public class BlockBreak implements Listener {
@@ -66,7 +67,9 @@ public class BlockBreak implements Listener {
 				}
 			}
 		} else {
+			e.getPlayer().sendMessage(CFMessages.ActiveCooldown);
 			e.setCancelled(true);
+			Bukkit.getServer().getPluginManager().callEvent(new ActiveCooldownEvent(e.getPlayer(), "break"));
 		}
 	}
 	

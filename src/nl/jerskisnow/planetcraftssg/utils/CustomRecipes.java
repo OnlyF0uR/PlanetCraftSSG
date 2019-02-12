@@ -195,7 +195,7 @@ public class CustomRecipes {
 		 * STEEL INGOT
 		 */
 		ShapedRecipe ironNuggetRecipe = new ShapedRecipe(
-				new NamespacedKey(plugin, "ironnugget_key"),
+				new NamespacedKey(plugin, "steelingot_key"),
 				new ItemStack(pcMaterial.STEEL_INGOT.getMaterial()));
 		ironNuggetRecipe.shape("MBG", "III", "   ");
 		ironNuggetRecipe.setIngredient('M', Material.MAGMA_CREAM);

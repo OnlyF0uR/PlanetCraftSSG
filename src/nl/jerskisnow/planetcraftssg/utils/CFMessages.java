@@ -167,5 +167,8 @@ public class CFMessages {
 	
 	public static final String LeftCountry = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("Country.Left"));
+	
+	public static final String ActiveCooldown = ChatColor.translateAlternateColorCodes('&',
+			plugin.dataManager.getMessage("ActiveCooldown"));
 
 }

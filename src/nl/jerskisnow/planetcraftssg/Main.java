@@ -15,6 +15,7 @@ import nl.jerskisnow.planetcraftssg.listeners.PlayerChat;
 import nl.jerskisnow.planetcraftssg.listeners.PlayerJoin;
 import nl.jerskisnow.planetcraftssg.listeners.PlayerQuit;
 import nl.jerskisnow.planetcraftssg.metrics.Metrics;
+import nl.jerskisnow.planetcraftssg.tasks.TimeChanger;
 import nl.jerskisnow.planetcraftssg.utils.CustomRecipes;
 import nl.jerskisnow.planetcraftssg.utils.DataManager;
 import nl.jerskisnow.planetcraftssg.utils.external.FileManager;
@@ -42,10 +43,11 @@ public class Main extends JavaPlugin {
 		
 		new Metrics(this);
 		
+		this.loadTasks();
 	}
 	
 	public void onDisable() {
-		dataManager.forceRemovePlayTime();
+		this.dataManager.forceRemovePlayTime();
 	}
 
 	private void loadCommands() {
@@ -63,6 +65,11 @@ public class Main extends JavaPlugin {
 		this.getServer().getPluginManager().registerEvents(new AntiPlayerReload(), this);
 		this.getServer().getPluginManager().registerEvents(new BlockBreak(), this);
 		this.getServer().getPluginManager().registerEvents(new BlockPlace(), this);
+	}
+	
+	@SuppressWarnings("deprecation")
+	private void loadTasks() {
+		this.getServer().getScheduler().runTaskTimer(this, new TimeChanger(), 0, 200);
 	}
 
 	private boolean isRequiredVersion() {

@@ -29,6 +29,8 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 
 import nl.jerskisnow.planetcraftssg.Main;
+import nl.jerskisnow.planetcraftssg.api.events.CountryCreateEvent;
+import nl.jerskisnow.planetcraftssg.api.events.CountryRemoveEvent;
 import nl.jerskisnow.planetcraftssg.utils.CFMessages;
 import nl.jerskisnow.planetcraftssg.utils.CountryManager;
 import nl.jerskisnow.planetcraftssg.utils.CountryManager.CountryRole;
@@ -101,6 +103,7 @@ public class Country implements CommandExecutor {
 					regions.addRegion(region);
 
 					sender.sendMessage(CFMessages.CountryHasBeenCreated(args[1]));
+					Bukkit.getServer().getPluginManager().callEvent(new CountryCreateEvent((Player) sender, args[1]));
 
 				} else if (args[0].equalsIgnoreCase("remove")) {
 					if (!CountryManager.countryExists(args[1], ((Player) sender).getWorld())) {
@@ -113,6 +116,7 @@ public class Country implements CommandExecutor {
 							.removeRegion(args[1]);
 
 					sender.sendMessage(CFMessages.CountryHasBeenRemoved(args[1]));
+					Bukkit.getServer().getPluginManager().callEvent(new CountryRemoveEvent((Player) sender, args[1]));
 				} else if (args[0].equalsIgnoreCase("addmember")) {
 					Vector playerLocationVector = plugin.dataManager.getPlayerVector(((Player) sender).getLocation());
 

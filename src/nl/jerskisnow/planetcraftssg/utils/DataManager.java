@@ -93,26 +93,28 @@ public class DataManager {
 	public String getCountry(UUID userID) {
 		return plugin.fileManager.getConfig("PlayerData.yml").get().getString(userID + ".Country");
 	}
-
+	
+	// ---
 	public Double getCredits(UUID userID) {
 		return plugin.fileManager.getConfig("PlayerData.yml").get().getDouble(userID + ".Credits");
 	}
 
-	private int getPlayedDays(UUID userID) {
+	public int getPlayedDays(UUID userID) {
 		return plugin.fileManager.getConfig("PlayerData.yml").get().getInt(userID + ".Time.Days");
 	}
 
-	private int getPlayedHours(UUID userID) {
+	public int getPlayedHours(UUID userID) {
 		return plugin.fileManager.getConfig("PlayerData.yml").get().getInt(userID + ".Time.Hours");
 	}
 
-	private int getPlayedMinutes(UUID userID) {
+	public int getPlayedMinutes(UUID userID) {
 		return plugin.fileManager.getConfig("PlayerData.yml").get().getInt(userID + ".Time.Minutes");
 	}
 
-	private int getPlayedSeconds(UUID userID) {
+	public int getPlayedSeconds(UUID userID) {
 		return plugin.fileManager.getConfig("PlayerData.yml").get().getInt(userID + ".Time.Seconds");
 	}
+	// ---
 
 	public String getPlayedTime(UUID userID) {
 		StringBuilder sb = new StringBuilder(64);
@@ -154,25 +156,16 @@ public class DataManager {
 		return false;
 	}
 
-	public boolean isAdmin(Player p) {
-		if (p.hasPermission(plugin.fileManager.getConfig("Config.yml").get().getString("Permissions.Admin"))) {
-			return true;
-		}
-		return false;
+	public boolean isAdmin(OfflinePlayer p) {
+		return p.getPlayer().hasPermission(plugin.fileManager.getConfig("Config.yml").get().getString("Permissions.Admin"));
 	}
 
-	public boolean isStaff(Player p) {
-		if (p.hasPermission(plugin.fileManager.getConfig("Config.yml").get().getString("Permissions.Staff"))) {
-			return true;
-		}
-		return false;
+	public boolean isStaff(OfflinePlayer p) {
+		return p.getPlayer().hasPermission(plugin.fileManager.getConfig("Config.yml").get().getString("Permissions.Staff"));
 	}
 
-	public boolean isBuilder(Player p) {
-		if (p.hasPermission(plugin.fileManager.getConfig("Config.yml").get().getString("Permissions.Builder"))) {
-			return true;
-		}
-		return false;
+	public boolean isBuilder(OfflinePlayer p) {
+		return p.getPlayer().hasPermission(plugin.fileManager.getConfig("Config.yml").get().getString("Permissions.Builder"));
 	}
 
 	public com.sk89q.worldedit.Vector getPlayerVector(Location loc) {

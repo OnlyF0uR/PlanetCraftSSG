@@ -9,6 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import nl.jerskisnow.planetcraftssg.Main;
+import nl.jerskisnow.planetcraftssg.api.events.ActiveCooldownEvent;
+import nl.jerskisnow.planetcraftssg.utils.CFMessages;
 
 public class BlockPlace implements Listener {
 
@@ -28,7 +30,9 @@ public class BlockPlace implements Listener {
 				}, (long) (plugin.fileManager.getConfig("Config.yml").get().getLong("BlockPlaceCooldown") * 20));	
 			}
 		} else {
+			e.getPlayer().sendMessage(CFMessages.ActiveCooldown);
 			e.setCancelled(true);
+			Bukkit.getServer().getPluginManager().callEvent(new ActiveCooldownEvent(e.getPlayer(), "place"));
 		}
 	}
 
