@@ -3,6 +3,7 @@ package nl.jerskisnow.planetcraftssg.api.data;
 import org.bukkit.OfflinePlayer;
 
 import nl.jerskisnow.planetcraftssg.Main;
+import nl.jerskisnow.planetcraftssg.utils.external.Vault;
 
 public class PlayerData {
 	
@@ -15,7 +16,7 @@ public class PlayerData {
 	}
 	
 	public Double getCoins() {
-		return plugin.dataManager.getCoins(p.getUniqueId());
+		return Vault.econ.getBalance(p);
 	}
 	
 	public Integer getLevel() {
@@ -61,6 +62,10 @@ public class PlayerData {
 	
 	public boolean isBuilder() {
 		return plugin.dataManager.isBuilder(p);
+	}
+	
+	public boolean isRegistered() {
+		return plugin.dataManager.isRegisteredPlayer(p.getUniqueId());
 	}
 
 }

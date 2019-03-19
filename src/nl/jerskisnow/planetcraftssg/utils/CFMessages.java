@@ -34,12 +34,14 @@ public class CFMessages {
 	/*
 	 * (Staff)Chat
 	 */
-	public static final String ChatFormat(String country, Integer level, String playername, String message) {
+	public static final String ChatFormat(String country, Integer level, String playername, String displayname, String chatcolor, String message) {
 		return ChatColor.translateAlternateColorCodes('&',
 				plugin.dataManager.getMessage("ChatFormat")
 						.replaceAll("<Country>", country)
 				    	.replaceAll("<Level>", level.toString())
 						.replaceAll("<PlayerName>", playername)
+						.replaceAll("<DisplayName>", displayname)
+						.replaceAll("<ChatColor>", chatcolor)
 						.replaceAll("<Message>", message));
 	}
 	public static final String StaffChatFormat(String playername, String message) {
@@ -170,5 +172,20 @@ public class CFMessages {
 	
 	public static final String ActiveCooldown = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("ActiveCooldown"));
+	
+	public static final String ChangedChatColor(String chatcolor) {
+		return ChatColor.translateAlternateColorCodes('&',
+				plugin.dataManager.getMessage("ChangedChatColor")
+						.replaceAll("<ChatColor>", chatcolor));
+	}
+	
+	public static final String InvalidChatColor = ChatColor.translateAlternateColorCodes('&',
+			plugin.dataManager.getMessage("InvalidChatColor"));
+	
+	public static final String EnteredStaffMode = ChatColor.translateAlternateColorCodes('&',
+			plugin.dataManager.getMessage("EnteredStaffMode"));
+	
+	public static final String LeftStaffMode = ChatColor.translateAlternateColorCodes('&',
+			plugin.dataManager.getMessage("LeftStaffMode"));
 
 }

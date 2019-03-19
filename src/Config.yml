@@ -1,17 +1,50 @@
-# Config file
-Version: 1.0.0
+# Configuration file
+# ---------------------------------------------------------------------------
+# It us recommended to turn of your server, then edit the configuration files
+# and if you are done you can startup your server to test the changes
+# You can change all the messages in the Messages.yml file and you can change
+# the settings for the AutoBroadcaster in AutoBroadcaster.yml
+# ---------------------------------------------------------------------------
+
+# This is the version of the plugin, do not change it!
+Version: 1.1.0
+
+# The options below will be applied to a player who joined for the first time
 StartersOptions:
+  Country: 'None'
   Coins: 100.0
   Level: 1
-  Country: 'None'
   Credits: 0.0
+  ChatColor: '&7'
+  
+# The Amount of playtime hours to gain 1 level
+AmountOfHoursPerLevel: 12
+
+# You can change the permissions below
 Permissions:
   Admin: 'planetcraftssg.admin'
   Staff: 'planetcraftssg.staff'
   Builder: 'planetcraftssg.builder'
+
+# All the customizable options related to the scoreboard
 Scoreboard:
   Title: '&6&lPlanetCraft'
   Footer: '&3play.example.net'
+
+# If this is true the player cannot break a block with the wrong tool
+# If this is set to false the player will be able to break a block with the wrong tool
 CancelBlockBreakWithWrongTool: false
+
+# Cooldowns
 BlockBreakCooldown: 1.5
 BlockPlaceCooldown: 1.5
+
+# True means that realtime is enabled, false means that the time will act like
+# in a normal minecraft world. CHANGING THIS REQUIRES A SERVER RESTART!
+Realtime: true
+
+# Change this to true if you installed TitleAPI and want to show titles when
+# entering a country for example
+TitleAPI: false
+
+# Welp you made it through the whole configuration! Good job m8!

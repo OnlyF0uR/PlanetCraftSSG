@@ -1,10 +1,10 @@
 name: PlanetCraftSSG
-version: 1.0.1
+version: 1.1.0
 main: nl.jerskisnow.planetcraftssg.Main
-description: PlanetCraftSSG plugin
+description: Official PlanetCraftSSG Plugin
 author: jerskisnow
 api-version: 1.13
-depend: [WorldEdit, WorldGuard]
+depend: [WorldEdit, WorldGuard, Vault]
 commands:
   time:
     usage: /<command>
@@ -20,5 +20,19 @@ commands:
     - credit
   country:
     usage: /<command>
+    aliases: 
+    - ctry
   report:
     usage: /<command>
+  chatcolor:
+    usage: /<command>
+    aliases:
+    - cc
+    - chatc
+    - ccolor
+  staffmode:
+    usage: /<command>
+    aliases:
+    - sm
+    - staffm
+    - smode

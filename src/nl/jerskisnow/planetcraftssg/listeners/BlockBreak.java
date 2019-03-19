@@ -19,7 +19,7 @@ public class BlockBreak implements Listener {
 	private ArrayList<String> cooldown = new ArrayList<>();
 	
 	@EventHandler
-	public void onBreak(BlockBreakEvent e) {		
+	public void onBreak(BlockBreakEvent e) {
 		if (!cooldown.contains(e.getPlayer().getName())) {
 			if (e.getPlayer().getGameMode() != GameMode.CREATIVE) {
 				cooldown.add(e.getPlayer().getName());
@@ -31,7 +31,7 @@ public class BlockBreak implements Listener {
 			}
 			if (this.isShovelBlock(e.getBlock().getType())) {
 				if (!this.isShovelTool(e.getPlayer().getInventory().getItemInMainHand().getType())) {
-					if (plugin.fileManager.getConfig("Config").get().getBoolean("CancelBlockBreakWithWrongTool")) {
+					if (plugin.fileManager.getConfig("Config.yml").get().getBoolean("CancelBlockBreakWithWrongTool")) {
 						e.setCancelled(true);
 						e.getPlayer().sendMessage(CFMessages.WrongTool);
 						return;
@@ -40,7 +40,7 @@ public class BlockBreak implements Listener {
 				}
 			} else if (this.isAxeBlock(e.getBlock().getType())) {
 				if (!this.isAxeTool(e.getPlayer().getInventory().getItemInMainHand().getType())) {
-					if (plugin.fileManager.getConfig("Config").get().getBoolean("CancelBlockBreakWithWrongTool")) {
+					if (plugin.fileManager.getConfig("Config.yml").get().getBoolean("CancelBlockBreakWithWrongTool")) {
 						e.setCancelled(true);
 						e.getPlayer().sendMessage(CFMessages.WrongTool);
 						return;
@@ -49,7 +49,7 @@ public class BlockBreak implements Listener {
 				}
 			} else if (this.isShearBlock(e.getBlock().getType())) {
 				if (!this.isShearTool(e.getPlayer().getInventory().getItemInMainHand().getType())) {
-					if (plugin.fileManager.getConfig("Config").get().getBoolean("CancelBlockBreakWithWrongTool")) {
+					if (plugin.fileManager.getConfig("Config.yml").get().getBoolean("CancelBlockBreakWithWrongTool")) {
 						e.setCancelled(true);
 						e.getPlayer().sendMessage(CFMessages.WrongTool);
 						return;
@@ -58,7 +58,7 @@ public class BlockBreak implements Listener {
 				}
 			} else if (this.isHoeBlock(e.getBlock().getType())) {
 				if (!this.isHoeTool(e.getPlayer().getInventory().getItemInMainHand().getType())) {
-					if (plugin.fileManager.getConfig("Config").get().getBoolean("CancelBlockBreakWithWrongTool")) {
+					if (plugin.fileManager.getConfig("Config.yml").get().getBoolean("CancelBlockBreakWithWrongTool")) {
 						e.setCancelled(true);
 						e.getPlayer().sendMessage(CFMessages.WrongTool);
 						return;

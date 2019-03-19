@@ -13,9 +13,12 @@ public class PlayerQuit implements Listener {
 
 	@EventHandler
 	public void onLeave(PlayerQuitEvent e) {
-		e.setQuitMessage(CFMessages.PlayerQuit(e.getPlayer().getName()));
 		plugin.dataManager.endPlayTimeProcess(e.getPlayer().getUniqueId());
 		plugin.dataManager.forceRemoveStaffChat(e.getPlayer());
+		
+		plugin.dataManager.removeStaffMode(e.getPlayer());
+		
+		e.setQuitMessage(CFMessages.PlayerQuit(e.getPlayer().getName()));
 	}
 
 }

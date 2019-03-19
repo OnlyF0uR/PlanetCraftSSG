@@ -32,6 +32,8 @@ public class PlayTime implements CommandExecutor {
 				if (plugin.dataManager.isRegisteredPlayer(mentionedPlayer.getUniqueId())) {
 					sender.sendMessage(CFMessages.PlayerPlayTime(mentionedPlayer.getName(),
 							plugin.dataManager.getPlayedTime(mentionedPlayer.getUniqueId())));
+					plugin.dataManager.endPlayTimeProcess(mentionedPlayer.getUniqueId());
+					plugin.dataManager.initiatePlayTimeProcess(mentionedPlayer.getUniqueId());
 				} else {
 					sender.sendMessage(CFMessages.PlayerDoesNotExists);
 				}

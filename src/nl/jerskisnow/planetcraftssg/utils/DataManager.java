@@ -24,6 +24,8 @@ public class DataManager {
 
 	private ArrayList<String> staffChat = new ArrayList<>();
 	
+	private ArrayList<String> staffMode = new ArrayList<>();
+	
 	private SimpleDateFormat datum = new SimpleDateFormat("dd-MM-yyyy");
 
 	Main plugin;
@@ -37,6 +39,15 @@ public class DataManager {
 		plugin.fileManager.getConfig("Messages.yml").copyDefaults(true).save();
 		plugin.fileManager.getConfig("PlayerData.yml").copyDefaults(true).save();
 		plugin.fileManager.getConfig("ReportData.yml").copyDefaults(true).save();
+		plugin.fileManager.getConfig("AutoBroadcaster.yml").copyDefaults(true).save();
+	}
+	
+	public void reloadFiles() {
+		plugin.fileManager.getConfig("Config.yml").reload();
+		plugin.fileManager.getConfig("Messages.yml").reload();
+		plugin.fileManager.getConfig("PlayerData.yml").reload();
+		plugin.fileManager.getConfig("ReportData.yml").reload();
+		plugin.fileManager.getConfig("AutoBroadcaster.yml").reload();
 	}
 
 	public boolean isRegisteredPlayer(UUID userID) {
@@ -53,7 +64,7 @@ public class DataManager {
 	public void saveNewPlayer(UUID userID) {
 		/*
 		 * UUID:
-		 *   Coins: 0.0
+		 *   Country: 'None'
 		 *   Level: 1 
 		 *   Credits: 0.0 
 		 *   Time: 
@@ -61,37 +72,35 @@ public class DataManager {
 		 *     Hours: 0
 		 *     Minutes: 0 
 		 *     Seconds: 0
+		 *   ChatColor: '&7'
+		 *   TimeUntillNextLevel: 12
 		 */
-		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".Coins",
-				plugin.fileManager.getConfig("Config.yml").get().getDouble("StartersOptions.Coins"));
-		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".Level",
-				plugin.fileManager.getConfig("Config.yml").get().getInt("StartersOptions.Level"));
 		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".Country",
 				plugin.fileManager.getConfig("Config.yml").get().getString("StartersOptions.Country"));
+		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".Level",
+				plugin.fileManager.getConfig("Config.yml").get().getInt("StartersOptions.Level"));
 		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".Credits",
 				plugin.fileManager.getConfig("Config.yml").get().getDouble("StartersOptions.Credits"));
-		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".Time", 0); // TODO: There is a change that
-																						// this can be removed
+		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".Time", 0);
 		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".Time.Days", 0L);
 		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".Time.Hours", 0L);
 		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".Time.Minutes", 0L);
 		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".Time.Seconds", 0L);
+		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".ChatColor",
+				plugin.fileManager.getConfig("Config.yml").get().getString("StartersOptions.ChatColor"));
+		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".TimeUntillNextLevel", 12);
 		plugin.fileManager.getConfig("PlayerData.yml").save();
 	}
 
 	/*
 	 * Getters for the PlayerData file
 	 */
-	public Double getCoins(UUID userID) {
-		return plugin.fileManager.getConfig("PlayerData.yml").get().getDouble(userID + ".Coins");
-	}
-
-	public Integer getLevel(UUID userID) {
-		return plugin.fileManager.getConfig("PlayerData.yml").get().getInt(userID + ".Level");
-	}
-
 	public String getCountry(UUID userID) {
 		return plugin.fileManager.getConfig("PlayerData.yml").get().getString(userID + ".Country");
+	}
+	
+	public Integer getLevel(UUID userID) {
+		return plugin.fileManager.getConfig("PlayerData.yml").get().getInt(userID + ".Level");
 	}
 	
 	// ---
@@ -113,6 +122,10 @@ public class DataManager {
 
 	public int getPlayedSeconds(UUID userID) {
 		return plugin.fileManager.getConfig("PlayerData.yml").get().getInt(userID + ".Time.Seconds");
+	}
+	
+	public String getChatColor(UUID userID) {
+		return plugin.fileManager.getConfig("PlayerData.yml").get().getString(userID + ".ChatColor");
 	}
 	// ---
 
@@ -150,10 +163,11 @@ public class DataManager {
 	}
 
 	public boolean isInStaffChat(Player p) {
-		if (this.staffChat.contains(p.getName())) {
-			return true;
-		}
-		return false;
+		return this.staffChat.contains(p.getName());
+	}
+	
+	public boolean isInStaffMode(Player p) {
+		return this.staffMode.contains(p.getName());
 	}
 
 	public boolean isAdmin(OfflinePlayer p) {
@@ -168,37 +182,41 @@ public class DataManager {
 		return p.getPlayer().hasPermission(plugin.fileManager.getConfig("Config.yml").get().getString("Permissions.Builder"));
 	}
 
-	public com.sk89q.worldedit.Vector getPlayerVector(Location loc) {
+	public com.sk89q.worldedit.Vector locationToVector(Location loc) {
 		return new com.sk89q.worldedit.Vector(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
 	}
 
 	/*
 	 * Setters for the PlayerData file
 	 */
-	public void setCoins(OfflinePlayer p, Double newCoins) {
-		plugin.fileManager.getConfig("PlayerData.yml").get().set(p.getUniqueId() + ".Job", newCoins);
+	public void setCountry(UUID userID, String newCountry) {
+		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".Country", newCountry);
 		plugin.fileManager.getConfig("PlayerData.yml").save();
 	}
-
-	public void setLevel(OfflinePlayer p, Integer newLevel) {
-		plugin.fileManager.getConfig("PlayerData.yml").get().set(p.getUniqueId() + ".Age", newLevel);
+	public void setLevel(UUID userID, Integer newLevel) {
+		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".Level", newLevel);
 		plugin.fileManager.getConfig("PlayerData.yml").save();
 	}
 
 	public void addCredits(OfflinePlayer p, Double credits) {
-		plugin.fileManager.getConfig("PlayerData.yml").get().set(p.getUniqueId() + ".Tokens",
+		plugin.fileManager.getConfig("PlayerData.yml").get().set(p.getUniqueId() + ".Credits",
 				this.getCredits(p.getUniqueId()) + credits);
 		plugin.fileManager.getConfig("PlayerData.yml").save();
 	}
 
 	public void removeCredits(OfflinePlayer p, Double credits) {
-		plugin.fileManager.getConfig("PlayerData.yml").get().set(p.getUniqueId() + ".Tokens",
+		plugin.fileManager.getConfig("PlayerData.yml").get().set(p.getUniqueId() + ".Credits",
 				this.getCredits(p.getUniqueId()) - credits);
 		plugin.fileManager.getConfig("PlayerData.yml").save();
 	}
 
 	public void setCredits(OfflinePlayer p, Double newCredits) {
-		plugin.fileManager.getConfig("PlayerData.yml").get().set(p.getUniqueId() + ".Tokens", newCredits);
+		plugin.fileManager.getConfig("PlayerData.yml").get().set(p.getUniqueId() + ".Credits", newCredits);
+		plugin.fileManager.getConfig("PlayerData.yml").save();
+	}
+	
+	public void setChatColor(UUID userID, String newChatColor) {
+		plugin.fileManager.getConfig("PlayerData.yml").get().set(userID + ".ChatColor", newChatColor);
 		plugin.fileManager.getConfig("PlayerData.yml").save();
 	}
 
@@ -254,6 +272,18 @@ public class DataManager {
 		} else {
 			this.staffChat.add(p.getName());
 			p.sendMessage(CFMessages.EnteredStaffChat);
+		}
+	}
+	
+	public void setStaffMode(Player p) {
+		if (!isInStaffMode(p)) {
+			this.staffMode.add(p.getName());
+		}
+	}
+	
+	public void removeStaffMode(Player p) {
+		if (isInStaffMode(p)) {
+			this.staffMode.remove(p.getName());
 		}
 	}
 

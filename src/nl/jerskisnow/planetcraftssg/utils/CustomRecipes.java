@@ -173,7 +173,7 @@ public class CustomRecipes {
 		steelSword.setIngredient('W', this.getWoodChoices());
 		Bukkit.addRecipe(steelSword);
 	}
-	
+		
 	private void loadGear() {
 		/*
 		 * STEEL CHESTPLATE

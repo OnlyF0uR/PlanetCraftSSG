@@ -23,7 +23,12 @@ public class PlayerChat implements Listener {
 				}
 			}
 		}
-		e.setFormat(CFMessages.ChatFormat(plugin.dataManager.getCountry(e.getPlayer().getUniqueId()),
-				plugin.dataManager.getLevel(e.getPlayer().getUniqueId()), e.getPlayer().getName(), e.getMessage()));
+		e.setFormat(CFMessages.ChatFormat(
+				plugin.dataManager.getCountry(e.getPlayer().getUniqueId()),
+				plugin.dataManager.getLevel(e.getPlayer().getUniqueId()),
+				e.getPlayer().getName(),
+				e.getPlayer().getDisplayName(),
+				plugin.dataManager.getChatColor(e.getPlayer().getUniqueId()),
+				e.getMessage()));
 	}
 }

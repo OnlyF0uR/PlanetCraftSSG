@@ -9,6 +9,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import nl.jerskisnow.planetcraftssg.Main;
+import nl.jerskisnow.planetcraftssg.utils.external.Vault;
 
 public class ScoreboardManager {
 
@@ -33,8 +34,7 @@ public class ScoreboardManager {
 
 		coinsTeam.addEntry(ChatColor.translateAlternateColorCodes('&', "&r&a"));
 		coinsTeam.setPrefix("");
-//		initiateCoins(p);
-		coinsTeam.setSuffix("100.0");
+		initiateCoins(p);
 		o.getScore(ChatColor.translateAlternateColorCodes('&', "&r&a")).setScore(8);
 
 		o.getScore("§1").setScore(7);
@@ -63,7 +63,7 @@ public class ScoreboardManager {
 	}
 
 	public static void initiateCoins(Player p) {
-		coinsTeam.setSuffix(plugin.dataManager.getCoins(p.getUniqueId()).toString());
+		coinsTeam.setSuffix(String.valueOf(Vault.econ.getBalance(p)));
 	}
 
 	public static void initiateLevel(Player p) {

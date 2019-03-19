@@ -1,0 +1,11 @@
+# AutoBroadCaster file
+# Set this to true to enable, REQUIRES RESTART!!!
+Enabled: false
+Time_In_Seconds: 180
+
+Prefix: "&8(&4Alert&8)"
+
+Messages:
+ - "Message one"
+ - "Message two"
+ - "Message three"

@@ -118,7 +118,7 @@ public class Country implements CommandExecutor {
 					sender.sendMessage(CFMessages.CountryHasBeenRemoved(args[1]));
 					Bukkit.getServer().getPluginManager().callEvent(new CountryRemoveEvent((Player) sender, args[1]));
 				} else if (args[0].equalsIgnoreCase("addmember")) {
-					Vector playerLocationVector = plugin.dataManager.getPlayerVector(((Player) sender).getLocation());
+					Vector playerLocationVector = plugin.dataManager.locationToVector(((Player) sender).getLocation());
 
 					@SuppressWarnings("deprecation")
 					OfflinePlayer mentionedPlayer = Bukkit.getOfflinePlayer(args[1]);
@@ -128,13 +128,14 @@ public class Country implements CommandExecutor {
 									.getWorldByName(((Player) sender).getWorld().getName()))
 							.getApplicableRegions(playerLocationVector)) {
 						r.getMembers().addPlayer(mentionedPlayer.getUniqueId());
+						plugin.dataManager.setCountry(mentionedPlayer.getUniqueId(), r.getId());
 						sender.sendMessage(CFMessages.AddedPlayerToCountry(mentionedPlayer.getName(), r.getId(),
 								CountryRole.MEMBER.toString()));
 						return true;
 					}
 					sender.sendMessage(CFMessages.InvalidCountry);
 				} else if (args[0].equalsIgnoreCase("removemember")) {
-					Vector playerLocationVector = plugin.dataManager.getPlayerVector(((Player) sender).getLocation());
+					Vector playerLocationVector = plugin.dataManager.locationToVector(((Player) sender).getLocation());
 
 					@SuppressWarnings("deprecation")
 					OfflinePlayer mentionedPlayer = Bukkit.getOfflinePlayer(args[1]);
@@ -144,13 +145,14 @@ public class Country implements CommandExecutor {
 									.getWorldByName(((Player) sender).getWorld().getName()))
 							.getApplicableRegions(playerLocationVector)) {
 						r.getMembers().removePlayer(mentionedPlayer.getUniqueId());
+						plugin.dataManager.setCountry(mentionedPlayer.getUniqueId(), plugin.fileManager.getConfig("Config.yml").get().getString("StartersOptions.Country"));
 						sender.sendMessage(CFMessages.RemovedPlayerFromCountry(mentionedPlayer.getName(), r.getId(),
 								CountryRole.MEMBER.toString()));
 						return true;
 					}
 					sender.sendMessage(CFMessages.InvalidCountry);
 				} else if (args[0].equalsIgnoreCase("addowner")) {
-					Vector playerLocationVector = plugin.dataManager.getPlayerVector(((Player) sender).getLocation());
+					Vector playerLocationVector = plugin.dataManager.locationToVector(((Player) sender).getLocation());
 
 					@SuppressWarnings("deprecation")
 					OfflinePlayer mentionedPlayer = Bukkit.getOfflinePlayer(args[1]);
@@ -160,13 +162,14 @@ public class Country implements CommandExecutor {
 									.getWorldByName(((Player) sender).getWorld().getName()))
 							.getApplicableRegions(playerLocationVector)) {
 						r.getOwners().addPlayer(mentionedPlayer.getUniqueId());
+						plugin.dataManager.setCountry(mentionedPlayer.getUniqueId(), r.getId());
 						sender.sendMessage(CFMessages.AddedPlayerToCountry(mentionedPlayer.getName(), r.getId(),
 								CountryRole.OWNER.toString()));
 						return true;
 					}
 					sender.sendMessage(CFMessages.InvalidCountry);
 				} else if (args[0].equalsIgnoreCase("removeowner")) {
-					Vector playerLocationVector = plugin.dataManager.getPlayerVector(((Player) sender).getLocation());
+					Vector playerLocationVector = plugin.dataManager.locationToVector(((Player) sender).getLocation());
 
 					@SuppressWarnings("deprecation")
 					OfflinePlayer mentionedPlayer = Bukkit.getOfflinePlayer(args[1]);
@@ -176,17 +179,18 @@ public class Country implements CommandExecutor {
 									.getWorldByName(((Player) sender).getWorld().getName()))
 							.getApplicableRegions(playerLocationVector)) {
 						r.getOwners().removePlayer(mentionedPlayer.getUniqueId());
+						plugin.dataManager.setCountry(mentionedPlayer.getUniqueId(), plugin.fileManager.getConfig("Config.yml").get().getString("StartersOptions.Country"));
 						sender.sendMessage(CFMessages.RemovedPlayerFromCountry(mentionedPlayer.getName(), r.getId(),
 								CountryRole.OWNER.toString()));
 						return true;
 					}
 					sender.sendMessage(CFMessages.InvalidCountry);
 				} else {
-					this.SendHelp(sender);
+					this.sendHelp(sender);
 				}
 
 			} else if (args.length == 1 && args[0].equalsIgnoreCase("clear")) {
-				Vector playerLocationVector = plugin.dataManager.getPlayerVector(((Player) sender).getLocation());
+				Vector playerLocationVector = plugin.dataManager.locationToVector(((Player) sender).getLocation());
 
 				for (ProtectedRegion r : WorldGuard.getInstance().getPlatform().getRegionContainer()
 						.get(WorldGuard.getInstance().getPlatform()
@@ -198,8 +202,10 @@ public class Country implements CommandExecutor {
 					return true;
 				}
 				sender.sendMessage(CFMessages.InvalidCountry);
+			} else if (args.length == 0) {
+				this.sendHelp(sender);
 			} else if (args[0].equalsIgnoreCase("info")) {
-				Vector playerLocationVector = plugin.dataManager.getPlayerVector(((Player) sender).getLocation());
+				Vector playerLocationVector = plugin.dataManager.locationToVector(((Player) sender).getLocation());
 
 				for (ProtectedRegion r : WorldGuard.getInstance().getPlatform().getRegionContainer()
 						.get(WorldGuard.getInstance().getPlatform()
@@ -238,7 +244,7 @@ public class Country implements CommandExecutor {
 				}
 				sender.sendMessage(CFMessages.InvalidCountry);
 			} else {
-				this.SendHelp(sender);
+				this.sendHelp(sender);
 			}
 		} else {
 			if (args.length != 1) {
@@ -247,7 +253,7 @@ public class Country implements CommandExecutor {
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("info")) {
-				Vector playerLocationVector = plugin.dataManager.getPlayerVector(((Player) sender).getLocation());
+				Vector playerLocationVector = plugin.dataManager.locationToVector(((Player) sender).getLocation());
 
 				for (ProtectedRegion r : WorldGuard.getInstance().getPlatform().getRegionContainer()
 						.get(WorldGuard.getInstance().getPlatform()
@@ -300,10 +306,10 @@ public class Country implements CommandExecutor {
 				sender.sendMessage(ChatColor.RED + "/country leave");
 			}
 		}
-		return false;
+		return true;
 	}
 
-	private void SendHelp(CommandSender sender) {
+	private void sendHelp(CommandSender sender) {
 		sender.sendMessage(ChatColor.RED + "/country create <Name>");
 		sender.sendMessage(ChatColor.RED + "/country remove <Name>");
 		sender.sendMessage(ChatColor.RED + "/country addmember <Name>");
