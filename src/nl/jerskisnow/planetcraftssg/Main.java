@@ -10,6 +10,7 @@ import nl.jerskisnow.planetcraftssg.commands.PlayTime;
 import nl.jerskisnow.planetcraftssg.commands.Report;
 import nl.jerskisnow.planetcraftssg.commands.StaffChat;
 import nl.jerskisnow.planetcraftssg.commands.StaffMode;
+import nl.jerskisnow.planetcraftssg.commands.TradeMenu;
 import nl.jerskisnow.planetcraftssg.listeners.AntiPlayerReload;
 import nl.jerskisnow.planetcraftssg.listeners.BlockBreak;
 import nl.jerskisnow.planetcraftssg.listeners.BlockPlace;
@@ -22,6 +23,8 @@ import nl.jerskisnow.planetcraftssg.tasks.AutoBroadcaster;
 import nl.jerskisnow.planetcraftssg.tasks.LevelTimeChecker;
 import nl.jerskisnow.planetcraftssg.tasks.TimeChanger;
 import nl.jerskisnow.planetcraftssg.tasks.UpdateScoreboardCoins;
+import nl.jerskisnow.planetcraftssg.trading.TradeMenuListener;
+import nl.jerskisnow.planetcraftssg.trading.tradeMenuItems;
 import nl.jerskisnow.planetcraftssg.utils.CustomRecipes;
 import nl.jerskisnow.planetcraftssg.utils.DataManager;
 import nl.jerskisnow.planetcraftssg.utils.external.FileManager;
@@ -64,6 +67,12 @@ public class Main extends JavaPlugin {
 		
 		// Register the tasks
 		this.loadTasks();
+		
+		if (titleAPIExists()) {
+			this.dataManager.enabledTitleAPI();
+		}
+		
+		System.out.println("\n\n\n\n\n\n\n\n" + tradeMenuItems.DIRT.test());
 	}
 	
 	public void onDisable() {
@@ -78,6 +87,7 @@ public class Main extends JavaPlugin {
 		this.getCommand("report").setExecutor(new Report(this));
 		this.getCommand("chatcolor").setExecutor(new ChatColor(this));
 		this.getCommand("staffmode").setExecutor(new StaffMode(this));
+		this.getCommand("trademenu").setExecutor(new TradeMenu(this));
 	}
 
 	private void loadListeners() {
@@ -88,6 +98,7 @@ public class Main extends JavaPlugin {
 		this.getServer().getPluginManager().registerEvents(new BlockBreak(), this);
 		this.getServer().getPluginManager().registerEvents(new BlockPlace(), this);
 		this.getServer().getPluginManager().registerEvents(new PlayerMovement(), this);
+		this.getServer().getPluginManager().registerEvents(new TradeMenuListener(), this);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -100,7 +111,7 @@ public class Main extends JavaPlugin {
 		// Register the task that handles the level up, using the player time in hours
 		this.getServer().getScheduler().runTaskTimer(this, new LevelTimeChecker(), 0, 6000);
 		// Register the task that handles the scoreboard update for the amount of coins
-		this.getServer().getScheduler().runTaskTimer(this, new UpdateScoreboardCoins(), 0, 600);
+		this.getServer().getScheduler().runTaskTimer(this, new UpdateScoreboardCoins(), 0, 200);
 		
 		// Check if AutoBroadcaster is enabled, if yes register task
 		if (this.fileManager.getConfig("AutoBroadcaster.yml").get().getBoolean("Enabled")) {
@@ -113,6 +124,13 @@ public class Main extends JavaPlugin {
 		nmsver = nmsver.substring(nmsver.lastIndexOf(".") + 1);
 		return !nmsver.startsWith("v1_7_") && !nmsver.startsWith("v1_8_") && !nmsver.startsWith("v1_9_")
 				&& !nmsver.startsWith("v1_10_") && !nmsver.startsWith("v1_11_") && !nmsver.startsWith("v1_12_");
+	}
+	
+	private boolean titleAPIExists() {
+		if (Bukkit.getServer().getPluginManager().getPlugin("Vault") != null) {
+			return true;
+		}
+		return false;
 	}
 
 }

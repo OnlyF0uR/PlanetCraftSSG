@@ -187,5 +187,11 @@ public class CFMessages {
 	
 	public static final String LeftStaffMode = ChatColor.translateAlternateColorCodes('&',
 			plugin.dataManager.getMessage("LeftStaffMode"));
+	
+	public static final String NotEnoughCoins = ChatColor.translateAlternateColorCodes('&',
+			plugin.dataManager.getMessage("NotEnoughCoins"));
+	
+	public static final String NotEnoughItems = ChatColor.translateAlternateColorCodes('&',
+			plugin.dataManager.getMessage("NotEnoughItems"));
 
 }

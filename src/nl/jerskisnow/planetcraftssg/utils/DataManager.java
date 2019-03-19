@@ -264,7 +264,7 @@ public class DataManager {
 
 		playerTime.remove(userID);
 	}
-
+	
 	public void toggleStaffChat(Player p) {
 		if (isInStaffChat(p)) {
 			this.staffChat.remove(p.getName());
@@ -305,6 +305,11 @@ public class DataManager {
 				this.forceRemoveStaffChat(p);
 			}
 		}
+	}
+	
+	public void enabledTitleAPI() {
+		plugin.fileManager.getConfig("Config.yml").get().set("TitleAPI", true);
+		plugin.fileManager.getConfig("Config.yml").save();
 	}
 	
 	/*

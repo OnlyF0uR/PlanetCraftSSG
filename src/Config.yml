@@ -12,7 +12,7 @@ Version: 1.1.0
 # The options below will be applied to a player who joined for the first time
 StartersOptions:
   Country: 'None'
-  Coins: 100.0
+  Coins: 10.0
   Level: 1
   Credits: 0.0
   ChatColor: '&7'

@@ -36,3 +36,9 @@ commands:
     - sm
     - staffm
     - smode
+  trademenu:
+    usage: /<command>
+    aliases:
+    - tradeshop
+    - opentrademenu
+    - opentradeshop
