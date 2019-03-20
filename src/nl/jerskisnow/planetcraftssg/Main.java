@@ -24,7 +24,6 @@ import nl.jerskisnow.planetcraftssg.tasks.LevelTimeChecker;
 import nl.jerskisnow.planetcraftssg.tasks.TimeChanger;
 import nl.jerskisnow.planetcraftssg.tasks.UpdateScoreboardCoins;
 import nl.jerskisnow.planetcraftssg.trading.TradeMenuListener;
-import nl.jerskisnow.planetcraftssg.trading.tradeMenuItems;
 import nl.jerskisnow.planetcraftssg.utils.CustomRecipes;
 import nl.jerskisnow.planetcraftssg.utils.DataManager;
 import nl.jerskisnow.planetcraftssg.utils.external.FileManager;
@@ -71,8 +70,6 @@ public class Main extends JavaPlugin {
 		if (titleAPIExists()) {
 			this.dataManager.enabledTitleAPI();
 		}
-		
-		System.out.println("\n\n\n\n\n\n\n\n" + tradeMenuItems.DIRT.test());
 	}
 	
 	public void onDisable() {

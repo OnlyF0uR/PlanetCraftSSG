@@ -13,12 +13,12 @@ public enum tradeMenuItems {
 	/*
 	 * Normal Logs
 	 */
-	OAK_LOG(2.0, 4.0, "&fOak Log"),
-	SPRUCE_LOG(2.0, 4.0, "&fSpruce Log"),
-	BIRCH_LOG(2.0, 4.0, "&fBirch Log"),
-	JUNGLE_LOG(2.0, 4.0, "J&fungle Log"),
-	ACACIA_LOG(2.0, 4.0, "&fAcacia Log"),
-	DARK_OAK_LOG(2.0, 4.0, "&fDark Oak Log"),
+	OAK_LOG(4.0, 2.0, "&fOak Log"),
+	SPRUCE_LOG(4.0, 2.0, "&fSpruce Log"),
+	BIRCH_LOG(4.0, 2.0, "&fBirch Log"),
+	JUNGLE_LOG(4.0, 2.0, "J&fungle Log"),
+	ACACIA_LOG(4.0, 2.0, "&fAcacia Log"),
+	DARK_OAK_LOG(4.0, 2.0, "&fDark Oak Log"),
 	/*
 	 * Stripped Logs
 	 */
@@ -79,10 +79,6 @@ public enum tradeMenuItems {
 	
 	public Double getSellPrice() {
 		return sellPrice;
-	}
-	
-	public String test() {
-		return this.toString();
 	}
 	
 	public ItemStack getItemStack() {
